@@ -3,13 +3,11 @@
 {% block content %}
 <div style="text-align: center;">
 <h2>Task Form</h2>
-
 <form method="POST">
 {% csrf_token %}
     {{form.as_p}}
     Go Back <a href="{% url  'tasks'%}"><i class="fa-solid fa-left-long fa-xl"></i></a><br><br>
 <input type="Submit" button type="button" class="btn btn-light"></button>
-
 </form>
 </div>
 {% endblock content %}

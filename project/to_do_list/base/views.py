@@ -21,6 +21,7 @@ class CustomLoginView(LoginView):
     def get_success_url(self):
         return reverse_lazy('tasks')
     
+    
 class RegisterPage(FormView):
     template_name = 'base/register.html'
     form_class = UserCreationForm
@@ -41,6 +42,7 @@ class RegisterPage(FormView):
             return redirect('tasks')
         return super(RegisterPage, self).get(*args, **kwargs)
 
+
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'       # To Change the object 
@@ -55,10 +57,12 @@ class TaskList(LoginRequiredMixin, ListView):
         context['search_input'] = search_input
         return context
     
+    
 class TaskDetail(LoginRequiredMixin, DetailView):
     model = Task
     context_object_name = 'tasks'
     template_name = 'base/task.html'    # To Change the template name     
+   
     
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
@@ -80,14 +84,9 @@ class TaskUpdate(LoginRequiredMixin, UpdateView):
             print(task.status)
         context = {'tasks': tasks}
         return render(request, 'your_template.html', context)
+     
             
-    
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
-    
-    
-    
-    
-    

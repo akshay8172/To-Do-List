@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 #Many to 1 Relationship
 class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -12,7 +11,6 @@ class Task(models.Model):
     
     def __str__(self):
         return self.title
-    
     class Meta:
         ordering = ['complete']
     

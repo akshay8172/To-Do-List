@@ -1,7 +1,5 @@
 {% extends "base/main.html" %}
 {% block content %}
-
-
 <div class="header-bar">
     <div>
         <h1>Hello, {{request.user|capfirst}} </h1>
@@ -25,11 +23,10 @@
 Add Task <a href="{% url 'task-create' %}"><i class="fa-solid fa-square-plus fa-2xl"></i></a></div>
 <form method="GET">
     <input type="text" name="search-area" value="{{search_input}}">
-    
     <input type="submit" button type="button" class="btn btn-success"></button>
 </form><br></div>
 
-<table class="table" border="3" style="width: 100%; ">    
+    <table class="table" border="3" style="width: 100%; ">    
     <tr>
         <th>ITEMS</th>
         <th>STATUS</th>
