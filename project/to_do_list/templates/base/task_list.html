@@ -1,0 +1,58 @@
+{% extends "base/main.html" %}
+{% block content %}
+
+
+<div class="header-bar">
+    <div>
+        <h1>Hello, {{request.user|capfirst}} </h1>
+        <h3 style="margin : 0">You have <b>{{ count }}</b> incomplete 
+            {% if count == 1 %}
+                Task 
+            {% else %}
+                Tasks
+            {% endif %}
+        </div>
+    {% if request.user.is_authenticated %}
+        <a class="link" href="{% url 'logout' %}"><button type="button" class="btn btn-secondary">Logout</button></a>
+    {% else %}
+        <a class="link" href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+<hr>
+<h1 style="text-align:center;color:rgb(66, 15, 15) "><i>To Do List</i></h1>
+<div style="text-align: right; padding-right: 40px;">
+<div style="text-align: left; padding-left: 20px;">
+Add Task <a href="{% url 'task-create' %}"><i class="fa-solid fa-square-plus fa-2xl"></i></a></div>
+<form method="GET">
+    <input type="text" name="search-area" value="{{search_input}}">
+    
+    <input type="submit" button type="button" class="btn btn-success"></button>
+</form><br></div>
+
+<table class="table" border="3" style="width: 100%; ">    
+    <tr>
+        <th>ITEMS</th>
+        <th>STATUS</th>
+        <th>EDIT</th>
+        <th>DELETE</th>
+    </tr>
+    {% for task in tasks %}
+        <tr>
+            <td style="padding: 10px;">{{ task.title }}</td>
+            <td style="padding: 10px;">
+                {% if task.complete %}
+                    Completed
+                {% else %}
+                    Pending
+                {% endif %}
+            </td>
+            <td style="padding: 10px;"><a href="{% url 'task-update' task.id %}"><i class="fa-solid fa-pen-to-square fa-xl"></i></a></td>
+            <td style="padding: 10px;"><a href="{% url 'task-delete' task.id %}"><i class="fa-solid fa-trash fa-xl"></i></a></td>
+        </tr>
+    {% empty %}
+        <tr>
+            <td colspan="4"><h3>No items in the list</h3></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock content %}
